@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
     if (listProduk != null) {
       setState(() {
         isLoaded = true;
+        print(isLoaded);
       });
     }else {
       print("gagal mengambil data produk");
@@ -59,12 +60,13 @@ class _HomePageState extends State<HomePage> {
           crossAxisSpacing: 5,
           mainAxisSpacing: 5
           ),
-          itemCount: listProduk?.length, 
+          // itemCount: listProduk?.length, 
+          itemCount: items.length,
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) =>DetailProduk(name: items[index]['name'], city: items[index]['city'], price: items[index]['price']
-                // )));
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>DetailProduk(name: items[index]['name'], city: items[index]['city'], price: items[index]['price']
+                )));
               },
               child: Card(
                 elevation: 10,
@@ -77,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: Center(
                         child: Image.asset(
-                          "assets/shoppingcart.png",
+                          items[index]['image'],
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -88,7 +90,8 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            listProduk![index].nama_p,
+                            // listProduk![index].nama_p,
+                            items[index]['name'],
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16.0,
@@ -96,7 +99,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(height: 4.0),
                           Text(
-                            listProduk![index].harga.toString(),
+                            // listProduk![index].harga.toString(),
+                            items[index]['city'],
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
