@@ -10,7 +10,7 @@ class Produk {
     required this.deskripsi_p,
     required this.harga,
     required this.stok,
-    required this.rating_harga,
+    this.rating_harga,
     this.body
   });
 
@@ -20,7 +20,7 @@ class Produk {
   String deskripsi_p;
   double harga;
   int stok;
-  double rating_harga;
+  double? rating_harga;
   String? body;
 
   factory Produk.fromJson(Map<String, dynamic> json) => Produk(

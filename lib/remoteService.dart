@@ -11,6 +11,8 @@ class RemoteServices {
     if (response.statusCode == 200) {
       var json = response.body;
       return postFromJson(json);
+    }else {
+      return null;
     }
   }
 }

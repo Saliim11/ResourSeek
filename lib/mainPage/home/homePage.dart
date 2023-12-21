@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var isLoaded = false;
+  
   // Example list of items
     final List<Map<String, dynamic>> items = List.generate(20, (index) {
     return {
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   });
 
   List<Produk>? listProduk = [];
-
+  var isLoaded = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -60,12 +60,12 @@ class _HomePageState extends State<HomePage> {
           crossAxisSpacing: 5,
           mainAxisSpacing: 5
           ),
-          // itemCount: listProduk?.length, 
-          itemCount: items.length,
+          itemCount: listProduk?.length, 
+          // itemCount: items.length,
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>DetailProduk(name: items[index]['name'], city: items[index]['city'], price: items[index]['price']
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>DetailProduk(produk: listProduk![index],
                 )));
               },
               child: Card(
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: Center(
                         child: Image.asset(
-                          items[index]['image'],
+                          "assets/shoppingcart.png",
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -90,8 +90,8 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            // listProduk![index].nama_p,
-                            items[index]['name'],
+                            listProduk![index].nama_p,
+                            // items[index]['name'],
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16.0,
@@ -99,8 +99,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(height: 4.0),
                           Text(
-                            // listProduk![index].harga.toString(),
-                            items[index]['city'],
+                            listProduk![index].deskripsi_p,
+                            // items[index]['city'],
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -111,7 +111,8 @@ class _HomePageState extends State<HomePage> {
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          items[index]['price'],
+                          "Rp.${listProduk![index].harga}",
+                          // items[index]['price'],
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
