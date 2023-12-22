@@ -13,7 +13,7 @@ class _SupplierHomePageState extends State<SupplierHomePage> {
 
   List<Produk>? listProduk = [];
   var isLoaded = false;
-  String id = "1";
+  int id = 1;
 
   @override
   void initState() {
@@ -23,8 +23,7 @@ class _SupplierHomePageState extends State<SupplierHomePage> {
   }
 
   getData() async{
-    // listProduk = await RemoteServices().getProdukByToko(id);
-    listProduk = await RemoteServices().getAllProduk();
+    listProduk = await RemoteServices().getProdukByToko(id);
     if (listProduk != null) {
       setState(() {
         isLoaded = true;

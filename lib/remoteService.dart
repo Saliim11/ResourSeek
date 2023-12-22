@@ -17,7 +17,7 @@ class RemoteServices {
     }
   }
 
-  Future<List<Produk>?> getProdukByToko(String id) async {
+  Future<List<Produk>?> getProdukByToko(int id) async {
     var client = http.Client();
 
     var uri = Uri.parse('http://localhost:8080/getProdukByIdToko/$id');

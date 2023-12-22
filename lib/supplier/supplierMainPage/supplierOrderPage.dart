@@ -12,14 +12,14 @@ class _SupplierOrderPageState extends State<SupplierOrderPage> {
   final List<ItemModel> mockItems = [
     ItemModel(
       status: 'Tawaran Baru',
-      imageUrl: 'URL_GAMBAR_1',
+      imageUrl: 'assets/shoppingcart.png',
       namaBarang: 'Nama Barang 1',
       tanggal: '2023-01-01',
       harga: 15000.0,
     ),
     ItemModel(
       status: 'Tawaran Baru',
-      imageUrl: 'URL_GAMBAR_2',
+      imageUrl: 'assets/shoppingcart.png',
       namaBarang: 'Nama Barang 2',
       tanggal: '2023-02-01',
       harga: 20000.0,
@@ -69,7 +69,7 @@ class CustomListView extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 3,
-                      child: Image.network(
+                      child: Image.asset(
                         items[index].imageUrl,
                         width: 60.0,
                         height: 60.0,
