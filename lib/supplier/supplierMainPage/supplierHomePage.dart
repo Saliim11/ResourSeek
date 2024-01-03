@@ -124,6 +124,10 @@ class _SupplierHomePageState extends State<SupplierHomePage> {
 }
 
 class CustomDialog extends StatelessWidget {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController stockController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -133,18 +137,21 @@ class CustomDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
+              controller: nameController,
               decoration: InputDecoration(
                 labelText: 'Name',
               ),
             ),
             SizedBox(height: 8),
             TextFormField(
+              controller: descriptionController,
               decoration: InputDecoration(
                 labelText: 'Description',
               ),
             ),
             SizedBox(height: 8),
             TextFormField(
+              controller: priceController,
               decoration: InputDecoration(
                 labelText: 'Price',
               ),
@@ -152,6 +159,7 @@ class CustomDialog extends StatelessWidget {
             ),
             SizedBox(height: 8),
             TextFormField(
+              controller: stockController,
               decoration: InputDecoration(
                 labelText: 'Stock',
               ),
@@ -159,8 +167,43 @@ class CustomDialog extends StatelessWidget {
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                // Add functionality to save or process data from text fields
+              onPressed: () async {
+                final newProduk = Produk(
+                  // Get data from controllers
+                  id_produk: 0, // Assign appropriate ID or handle on server
+                  id_toko: 1, // Assign appropriate store ID
+                  nama_p: nameController.text,
+                  deskripsi_p: descriptionController.text,
+                  harga: double.parse(priceController.text),
+                  stok: int.parse(stockController.text),
+                  rating_produk: 0
+                );
+
+                try {
+                  await RemoteServices().addProdukList2(newProduk);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Product added successfully')),
+                  );
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(e.toString())),
+                  );
+                }
+
+                // await RemoteServices().addProdukList([newProduk]).then((success) {
+                //   if (success) {
+                //     // Product added successfully
+                //     ScaffoldMessenger.of(context).showSnackBar(
+                //       SnackBar(content: Text('Product added successfully')),
+                //     );
+                //   } else {
+                //     // Failed to add product
+                //     ScaffoldMessenger.of(context).showSnackBar(
+                //       SnackBar(content: Text('Failed to add product')),
+                //     );
+                //   }
+                // });
+
                 Navigator.of(context).pop(); // Close the dialog
               },
               child: Text('Save'),

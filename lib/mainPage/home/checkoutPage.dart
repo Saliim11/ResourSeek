@@ -46,8 +46,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 // Gambar
                 Expanded(
                   flex: 2,
-                  child: Image.network(
-                    'URL_GAMBAR',
+                  child: Image.asset(
+                    'assets/shoppingcart.png',
                     width: 100.0, // Sesuaikan ukuran gambar
                     height: 100.0,
                     fit: BoxFit.cover,
